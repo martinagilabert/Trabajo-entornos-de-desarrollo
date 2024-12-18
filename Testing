@@ -1,0 +1,52 @@
+Tendríamos que cambiar el código y separarlo en clases para hacer el testing:
+
+EJEMPLO:
+
+public class Conversor {
+
+    public String convertirMetros(double metros) {
+        return metros + " metros son " + (metros / 1000) + " kilómetros, " +
+                (metros * 100) + " centímetros, y " + (metros * 1000) + " milímetros.";
+    }
+
+    public String convertirLitros(double litros) {
+        return litros + " litros son " + (litros * 1000) + " mililitros, " +
+                (litros * 10) + " decilitros, " + (litros * 100) + " centilitros.";
+    }
+
+    public String convertirGramos(double gramos) {
+        return gramos + " gramos son " + (gramos / 1000) + " kilogramos, " +
+                (gramos * 1000) + " miligramos.";
+    }
+}
+
+PRUEBAS UNITARIAS:
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class ConversorTest {
+
+    private final Conversor conversor = new Conversor();
+
+    @Test
+    void convertirMetros() {
+        double metros = 1.0;
+        String resultado = conversor.convertirMetros(metros);
+        assertEquals("1.0 metros son 0.001 kilómetros, 100.0 centímetros, y 1000.0 milímetros.", resultado);
+    }
+
+    @Test
+    void convertirLitros() {
+        double litros = 2.0;
+        String resultado = conversor.convertirLitros(litros);
+        assertEquals("2.0 litros son 2000.0 mililitros, 20.0 decilitros, 200.0 centilitros.", resultado);
+    }
+
+    @Test
+    void convertirGramos() {
+        double gramos = 500.0;
+        String resultado = conversor.convertirGramos(gramos);
+        assertEquals("500.0 gramos son 0.5 kilogramos, 500000.0 miligramos.", resultado);
+    }
+}
